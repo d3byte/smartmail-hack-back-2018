@@ -118,9 +118,11 @@ app.get('/get-directories', (req, res) => {
                 name: item.name,
                 messages_unread: item.messages_unread,
                 messages_total: item.messages_total,
-                messages_with_attachments: item.messages_with_attachments
+                messages_with_attachments: item.messages_with_attachments,
+                children: array.filter(child => child.parent === item.id)
             }
         })
+        // console.log(arr[0].children[])
         return res.json({ folders: arr })
     })
     .catch((error) => {
