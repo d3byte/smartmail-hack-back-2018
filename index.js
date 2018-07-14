@@ -36,6 +36,12 @@ app.get('/users', (req, res) => {
                 }
             })
             array = _.uniqBy(array, 'email')
+            let promises = users.map(user => axios.get(user.avatar))
+            const getUsersWithAvatar = users => new Promise(async (resolve, reject) => {
+                for await (let avatar of promises) {
+                    array = array.map(user => Object.assign({}, user, { avatar }))
+                }
+            })
             arr = array.map(item => {
                 return axios.get(item.avatar)
                     .then(response => {
