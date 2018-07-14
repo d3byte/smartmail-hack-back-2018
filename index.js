@@ -50,7 +50,7 @@ app.get('/get-users-letters', (req, res) => {
             access_token: "7c14c7013042745c88344919c73bd0eb1c0c5fb537363830",
             email: "smartmail_team4@mail.ru",
             offset,
-            folder,
+            folder: folder ? folder : 0,
             limit: 25,
             snippet_limit: 100,
             flags: {
