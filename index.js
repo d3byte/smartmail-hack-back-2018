@@ -36,19 +36,16 @@ app.get('/users', (req, res) => {
                 }
             })
             array = _.uniqBy(array, 'email')
-            let promises = users.map(user => axios.get(user.avatar))
-            const getUsersWithAvatar = users => new Promise(async (resolve, reject) => {
-                for await (let avatar of promises) {
-                    array = array.map(user => Object.assign({}, user, { avatar }))
-                }
-            })
-            arr = array.map(item => {
-                return axios.get(item.avatar)
-                    .then(response => {
-                        return response.request.res.req.agent.protocol+"//"+response.request.res.connection._host+response.request.path
-                    })
-            })
-            return res.json({ users: arr, offset, folder })
+
+            return Promise.all(
+                array.map(item => {
+                    return axios.get(item.avatar)
+                        .then(response => {
+                            item.avatar = response.request.res.req.agent.protocol+"//"+response.request.res.connection._host+response.request.path
+                            return 
+                        })
+                })).then(r => res.json({ users: array, offset, folder }))
+
         } else return res.json({ users: [], offset, folder })
     })
     .catch((error) => {
