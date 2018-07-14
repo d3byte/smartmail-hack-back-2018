@@ -1,0 +1,7 @@
+{
+  "name": "server-zhopa",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://gitlab.com/SmartMail_Hackathon/server-zhopa.git",
+  "license": "MIT"
+}
