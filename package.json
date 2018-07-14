@@ -5,6 +5,9 @@
   "repository": "https://gitlab.com/SmartMail_Hackathon/server-zhopa.git",
   "license": "MIT",
   "author": "Sergey Savtyra <pandinator@protonmail.com>",
+  "scripts": {
+    "dev": "nodemon index"
+  },
   "dependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
