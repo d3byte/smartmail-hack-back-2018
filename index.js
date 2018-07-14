@@ -28,9 +28,11 @@ app.get('/users', (req, res) => {
         const messages = response.data.body.messages
         if (messages !== undefined) {
             let array = messages.map(item => {
+                // console.log(item.correspondents.from[0].avatars)
                 return {
                     email: item.correspondents.from[0].email,
-                    name: item.correspondents.from[0].name
+                    name: item.correspondents.from[0].name,
+                    avatar: item.correspondents.from[0].avatars.default,
                 }
             })
             array = _.uniqBy(array, 'email')
@@ -112,16 +114,18 @@ app.get('/get-directories', (req, res) => {
     }).then((response) => {
         const array = response.data.body
         let arr = array.map(item => {
-            return {
-                id: item.id,
-                type: item.type,
-                name: item.name,
-                messages_unread: item.messages_unread,
-                messages_total: item.messages_total,
-                messages_with_attachments: item.messages_with_attachments,
-                children: array.filter(child => child.parent === item.id)
+            if (item.parent === '-1') {
+                return {
+                    id: item.id,
+                    type: item.type,
+                    name: item.name,
+                    messages_unread: item.messages_unread,
+                    messages_total: item.messages_total,
+                    messages_with_attachments: item.messages_with_attachments,
+                    children: array.filter(child => child.parent === item.id)
+                }
             }
-        })
+        }).filter(item => item != null)
         // console.log(arr[0].children[])
         return res.json({ folders: arr })
     })
