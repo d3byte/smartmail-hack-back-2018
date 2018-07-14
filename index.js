@@ -36,7 +36,13 @@ app.get('/users', (req, res) => {
                 }
             })
             array = _.uniqBy(array, 'email')
-            return res.json({ users: array, offset, folder })
+            arr = array.map(item => {
+                return axios.get(item.avatar)
+                    .then(response => {
+                        return response.request.res.req.agent.protocol+"//"+response.request.res.connection._host+response.request.path
+                    })
+            })
+            return res.json({ users: arr, offset, folder })
         } else return res.json({ users: [], offset, folder })
     })
     .catch((error) => {
