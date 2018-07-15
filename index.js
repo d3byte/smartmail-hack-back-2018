@@ -18,8 +18,8 @@ app.get('/users', (req, res) => {
             email: "smartmail_team4@mail.ru",
             offset,
             folder,
-            limit: 25,
-            snippet_limit: 100,
+            limit: 3333333333333,
+            snippet_limit: 3333333333333,
             flags: {
                 attach: true
             }
@@ -62,8 +62,8 @@ app.get('/get-users-letters', (req, res) => {
             email: "smartmail_team4@mail.ru",
             offset,
             folder: folder ? folder : 0,
-            limit: 25,
-            snippet_limit: 100,
+            limit: 33333333333,
+            snippet_limit: 3333333333333,
             flags: {
                 attach: true
             },
