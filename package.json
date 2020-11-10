@@ -13,7 +13,7 @@
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
     "express": "^4.16.3",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.19",
     "webpack": "^4.16.0"
   },
   "devDependencies": {
